@@ -1,0 +1,340 @@
+.luckywheel-page {
+  min-height: 100vh;
+  padding: 20px;
+  text-align: center;
+  background: radial-gradient(circle, #1e293b, #020617);
+  color: white;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #334155;
+}
+
+.luckywheel-page h1 {
+  margin-top: 70px;
+  font-size: 42px;
+}
+
+.luckywheel-page p {
+  color: #cbd5e1;
+}
+
+.wheel-area {
+  position: relative;
+  width: 320px;
+  height: 360px;
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pointer {
+  position: absolute;
+  top: 0;
+  z-index: 20;
+  font-size: 36px;
+  color: #facc15;
+  text-shadow: 0 0 12px black;
+}
+
+.wheel {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 8px solid white;
+  position: relative;
+  overflow: hidden;
+  background: conic-gradient(
+    #ef4444 0deg 30deg,
+    #f97316 30deg 60deg,
+    #facc15 60deg 90deg,
+    #22c55e 90deg 120deg,
+    #14b8a6 120deg 150deg,
+    #06b6d4 150deg 180deg,
+    #3b82f6 180deg 210deg,
+    #6366f1 210deg 240deg,
+    #8b5cf6 240deg 270deg,
+    #d946ef 270deg 300deg,
+    #ec4899 300deg 330deg,
+    #f43f5e 330deg 360deg
+  );
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
+}
+
+.wheel::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+}
+
+.winner-mode .wheel {
+  box-shadow:
+    0 0 35px rgba(250, 204, 21, 0.8),
+    0 0 70px rgba(249, 115, 22, 0.45);
+}
+
+.winner-sector {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: 2;
+  pointer-events: none;
+  animation: sectorGlow 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes sectorGlow {
+  from {
+    opacity: 0.55;
+  }
+
+  to {
+    opacity: 0.95;
+  }
+}
+
+.sector-label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 32px;
+  height: 32px;
+  margin-left: -16px;
+  margin-top: -16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  text-shadow: 1px 1px 3px black;
+  z-index: 3;
+}
+
+.winning-label {
+  color: #facc15;
+  text-shadow:
+    0 0 8px black,
+    0 0 12px #facc15,
+    0 0 22px #f97316;
+  animation: labelPulse 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes labelPulse {
+  from {
+    filter: brightness(1);
+  }
+
+  to {
+    filter: brightness(1.8);
+  }
+}
+
+.spin-button {
+  font-size: 22px;
+  padding: 16px 30px;
+  margin-bottom: 20px;
+}
+
+.result {
+  display: none;
+}
+
+.task-list {
+  max-width: 500px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-toggle-button {
+  width: 100%;
+  background: #f97316;
+  text-align: center;
+}
+
+.task-list-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.task-button {
+  background: #1e293b;
+  border: 1px solid #475569;
+  text-align: left;
+  font-size: 16px;
+}
+
+.task-button:hover {
+  background: #334155;
+}
+
+.edit-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 300;
+}
+
+.edit-box {
+  background: #111827;
+  padding: 24px;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid #475569;
+}
+
+.edit-box textarea {
+  width: 100%;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 16px;
+  resize: none;
+  border: none;
+  margin-bottom: 16px;
+}
+
+.edit-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.cancel-button {
+  background: #64748b;
+}
+
+.cancel-button:hover {
+  background: #475569;
+}
+
+.task-popover {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.78);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 20px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.task-card {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  padding: 34px 26px;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at top, rgba(249, 115, 22, 0.45), transparent 45%),
+    linear-gradient(145deg, #111827, #020617);
+  border: 2px solid rgba(250, 204, 21, 0.7);
+  box-shadow:
+    0 0 45px rgba(250, 204, 21, 0.35),
+    0 18px 60px rgba(0, 0, 0, 0.55);
+  text-align: center;
+  animation: taskPop 0.55s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.task-label {
+  margin: 0 0 10px;
+  color: #facc15;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.task-card h2 {
+  margin: 0 0 26px;
+  font-size: 38px;
+  line-height: 1.1;
+  color: white;
+}
+
+.task-card button {
+  background: #f97316;
+}
+
+@keyframes taskPop {
+  0% {
+    transform: scale(0.45) rotate(-7deg);
+    opacity: 0;
+  }
+
+  70% {
+    transform: scale(1.08) rotate(2deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 14px;
+  background: hsl(calc(var(--i) * 35), 90%, 60%);
+  border-radius: 3px;
+  animation: confettiBurst 1.4s ease-out forwards;
+  animation-delay: calc(var(--i) * 0.025s);
+}
+
+@keyframes confettiBurst {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translate(
+        calc(-170px + var(--i) * 20px),
+        calc(-220px + var(--i) * 12px)
+      )
+      rotate(520deg);
+    opacity: 0;
+  }
+}
