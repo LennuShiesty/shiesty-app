@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jenga</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 10px;
+      background-color: #121212;
+      color: #f0f0f0;
+      margin: 0;
+    }
+
+    select, button, input {
+      font-size: 1.2em;
+      padding: 10px;
+      margin: 10px 10px 10px 0;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button {
+      margin-left: 0;
+    }
+
+    /* Switch-tyyli (perus toggle) */
+    .disco-switch-container {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: white;
+      font-weight: bold;
+      font-size: 0.9em;
+      user-select: none;
+      z-index: 1000;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 22px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #444;
+      border-radius: 22px;
+      transition: 0.4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.4s;
+    }
+
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(18px);
+    }
+
+    /* DISCO TILA */
+
+    body.disco {
+      animation: discoBG 5s linear infinite;
+      color: yellow;
+    }
+
+    @keyframes discoBG {
+      0% { background-color: #ff0000; color: white; }
+      20% { background-color: #00ff00; color: black; }
+      40% { background-color: #0000ff; color: white; }
+      60% { background-color: #ffff00; color: black; }
+      80% { background-color: #ff00ff; color: white; }
+      100% { background-color: #ff0000; color: white; }
+    }
+
+    .valinta-rivi {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px auto;
+      max-width: 500px;
+      gap: 10px;
+    }
+
+    /* Numeroiden nappeja ympäröivä laatikko */
+    .numeronapit-container {
+      max-width: 550px;
+      margin: 0 auto;
+      border: 2px solid #666; /* harmaa reunus */
+      padding: 5px;
+      border-radius: 7px;
+      background-color: #121212;
+      box-shadow: none;
+    }
+
+    .numeronapit {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .numeronappi {
+      width: 40px;
+      height: 40px;
+      font-size: 1em;
+      border-radius: 4px;
+      background-color: #222;
+      color: white;
+      border: 1px solid #444;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .numeronappi:hover {
+      background-color: #555;
+    }
+
+    .valittu {
+      background-color: lightgreen;
+      color: black;
+    }
+
+    .tehtava {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ... muuhun tyyliin ei kosketa ... */
+
+    .tehtava-palikka {
+      background-color: sienna;
+      border: 3px solid #5a2d0c;
+      border-radius: 5px;
+      padding: 15px 25px;
+      font-size: 1.3em;
+      font-weight: bold;
+      max-width: 80%;
+      color: white;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+      position: relative;
+
+      /* Uutta: vakio leveys ja korkeus */
+      width: 300px;
+      min-height: 60px;
+      display: flex;
+      align-items: center; /* keskitetään teksti pystysuunnassa */
+      justify-content: center; /* keskitetään myös horisontaalisesti */
+      text-align: center;
+    }
+
+    .numero {
+      position: absolute;
+      top: 8px;
+      left: 12px;
+      font-weight: bold;
+      font-size: 1em;
+      color: white; /* valkoinen teksti */
+      background: transparent; /* EI taustaväriä */
+      padding: 0;
+      user-select: none;
+      pointer-events: none; /* numero ei ota vastaan klikkejä */
+    }
+
+    .logo-topright {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 70px;
+      height: auto;
+    }
+
+    .otsikkologo {
+      max-width: 200px;
+      margin-top: 10px;
+    }
+
+    /* Media query puhelimille - skrollaus päälle, max-height ja fixed korkeus */
+    @media (max-width: 600px) {
+      .numeronapit-container {
+        max-height: 260px;
+        overflow-y: auto;
+      }
+
+      .otsikkologo {
+        max-width: 120px;
+        margin-top: 5px;
+      }
+
+      .valinta-rivi {
+        flex-wrap: nowrap;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      select, button {
+        font-size: 1em;
+        padding: 8px;
+        margin: 10px 5px 10px 0;
+      }
+
+      .numeronappi {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9em;
+      }
+
+      .numeronapit-container {
+        max-width: 100%;
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="disco-switch-container">
+    <label class="switch">
+      <input type="checkbox" id="discoToggle" />
+      <span class="slider"></span>
+    </label>
+    <span>Disco</span>
+  </div>
+
+  <!-- Oikean yläkulman logo -->
+  <img src="logo2.png" alt="Logo" class="logo-topright" />
+
+  <!-- Jenga logo ylhäällä -->
+  <img src="jengaLogo2.png" alt="Jenga logo" class="otsikkologo" />
+
+  <div class="valinta-rivi">
+    <select id="pelimuoto" onchange="resetoiPeli()">
+      <option value="HC">Humalanhakuinen</option>
+      <option value="Sosiaalinen">Seurallisempi</option>
+      <option value="Mixed">Mixed</option>
+    </select>
+    <button onclick="resetoiPeli()">Nollaa peli</button>
+    <button onclick="valitseSatunnainen()">Satunnainen</button>
+  </div>
+
+  <div class="numeronapit-container">
+    <div class="numeronapit" id="numerot"></div>
+  </div>
+
+  <div class="tehtava" id="tehtava"></div>
+
+  <script>
+    const data = {
+      "HC": [
+        "Shotti", "Shotti", "Mysteerishotti", "Mysteerishotti", "Kasari :D", "Ota uusi palikka",
+        "Ota uusi palikka", "Ota uusi palikka", "Uusi palikka heikolla kädellä", "Uusi palikka heikolla kädellä",
+        "Sääntö", "Sääntö", "Sääntö", "Suunnanmuutos", "Suunnanmuutos", "Kategoria", "Kategoria",
+        "Kategoria", "1,2,3,...", "1,2,3,...", "1,2,3,...", "Skål! Kaikki juo 1", "Kunkkumuki 1/3",
+        "Kunkkumuki 2/3", "Kunkkumuki 3/3", "Vesiputous", "Vesiputous", "Vesiputous", "<-- juo 3",
+        "<-- juo 3", "juo 3 -->", "juo 3 -->", "Anna 3", "Anna 3", "Anna 3", "Ota 3",
+        "Ota 3", "Jaa 10", "Jaa 10", "Jaa 10", "K.P.S - Häviäjä juo 3", "K.P.S - Häviäjä juo 3",
+        "K.P.S - Häviäjä juo 3", "Kippis! Kaikki juo 3", "Pelin lyhin juo", "Pelin pisin juo",
+        "Suppilo :D", "Suppilo :D", "Suppilo :D", "Pelin vanhin jakaa 5", "Pelin nuorin jakaa 5"
+      ],
+      "Sosiaalinen": [
+        "Ota uusi palikka", "Ota uusi palikka", "Ota uusi palikka", "Paikkojen vaihto!",
+        "Paikkojen vaihto!", "Paikkojen vaihto!", "Kategoria", "Kategoria", "Kategoria",
+        "Kategoria", "Sääntö", "Sääntö", "Sääntö", "Väärä käsi (3 kierrosta)", "Väärä käsi (3 kierrosta)",
+        "Väärä käsi (3 kierrosta)", "Mykkä (3 kierrosta)", "Mykkä (3 kierrosta)", "Mykkä (3 kierrosta)",
+        "K.P.S - Häviäjä juo 3", "K.P.S - Häviäjä juo 3", "K.P.S - Häviäjä juo 3", "Jätkät juo",
+        "Mimmit juo", "Sinkut juo", "Varatut juo", "Vaihda biisi", "Vaihda biisi", "Vaihda biisi",
+        "Mielipide split", "Mielipide split", "Mielipide split", "Kuka viimeksi...",
+        "Kuka viimeksi...", "Kuka viimeksi...", "Äänestys (Esim. Kuka todennäköisemmin)",
+        "Äänestys (Esim. Kuka todennäköisemmin)", "Äänestys (Esim. Kuka todennäköisemmin)",
+        "Nuorin jakaa 5", "Vanhin jakaa 5", "Pisin jakaa 5", "Lyhin jakaa 5", "Suunnanmuutos",
+        "Suunnanmuutos", "Suunnanmuutos", "Toast!", "Toast!", "Hyräile: voittaja jakaa 10",
+        "Hyräile: voittaja jakaa 10", "Skål!", "Mysteerishotti"
+      ],
+      "Mixed": [
+		"Ota uusi palikka", "Paikkojen vaihto", "Kategoria", "Sääntö",
+		"Jätkät juo 3", "Mimmit juo 3", "Sinkut juo 3", "Varatut juo 3",
+		"Selvin juo 3", "Humalaisin skippaa", "Mielipide split", "Kuka viimeksi..?",
+		"Kuka todennäköisemmin?", "Vesiputous", "Nuorin jakaa 5", "Vanhin jakaa 5",
+		"Lyhin jakaa 5", "Pisin jakaa 5", "Toast!", "Skål!",
+		"Jaa 10", "Shotti", "Mysteerishotti", "Suunnanmuutos",
+		"1,2,3,...", "Suppilo :DD", "Vaihda biisi", "Ota uusi heikommalla kädellä",
+		"Ota ryhmäkuva", "Anna 3", "Ota 5",
+		"Sääntö", "Opiskelijat juo", "Työlliset juo",
+		"Työttömät juo", "En ole koskaan..", "Eetsi-papan myrkky ;)",
+		"Orja / Huora", "K.P.S - Voittaja jakaa 5",
+		"Juo 10, jos etunimi alkaa S ja sukunimi R", "Röökaajat juo 5",
+		"Imitoi jotain!", "Alle 26v juo 3", "Yli 26v juo 3",
+		"Lomota tyhjäks", "Lemmikin omistajat juo 3",
+		"Kuva perheryhmään tms.!", "Soita kaverille!",
+		"Pohjoisimmasta kotoisin juo 4", "Eteläisimmästä kotoisin juo 4",
+		"Kaada torni"
+	 ]
+    };
+
+    const valitut = new Set();
+
+    function luoNapit() {
+      const pelimuoto = document.getElementById("pelimuoto").value;
+      const numerotDiv = document.getElementById("numerot");
+      numerotDiv.innerHTML = "";
+
+      for (let i = 1; i <= 51; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = i;
+        btn.classList.add("numeronappi");
+
+        if (valitut.has(i)) {
+          btn.classList.add("valittu");
+        }
+
+        btn.onclick = () => naytaTehtava(i, btn);
+
+        numerotDiv.appendChild(btn);
+      }
+    }
+
+    function naytaTehtava(numero, btn) {
+      const pelimuoto = document.getElementById("pelimuoto").value;
+      const tehtavaDiv = document.getElementById("tehtava");
+
+      if (valitut.has(numero)) {
+        return;
+      }
+
+      valitut.add(numero);
+      btn.classList.add("valittu");
+
+      let tehtavaTeksti = data[pelimuoto][numero - 1] || "Ei tehtävää";
+
+      tehtavaDiv.innerHTML = `
+        <div class="tehtava-palikka">
+          <div class="numero">${numero}</div>
+          ${tehtavaTeksti}
+        </div>
+      `;
+    }
+
+    function resetoiPeli() {
+      valitut.clear();
+      luoNapit();
+      document.getElementById("tehtava").innerHTML = "";
+    }
+
+    function valitseSatunnainen() {
+  const pelimuoto = document.getElementById("pelimuoto").value;
+  const kaikkiNumerot = Array.from({length: 51}, (_, i) => i + 1);
+  const valittamattomat = kaikkiNumerot.filter(n => !valitut.has(n));
+
+  if (valittamattomat.length === 0) {
+    alert("Kaikki tehtävät on jo valittu!");
+    return;
+  }
+
+  const randomIndex = Math.floor(Math.random() * valittamattomat.length);
+  const numero = valittamattomat[randomIndex];
+
+  // Etsi nappi, joka vastaa tätä numeroa
+  const numerotDiv = document.getElementById("numerot");
+  const napit = numerotDiv.getElementsByTagName("button");
+  for (const btn of napit) {
+    if (parseInt(btn.textContent, 10) === numero) {
+      naytaTehtava(numero, btn);
+      break;
+    }
+  }
+}
+
+    
+    window.onload = () => {
+      luoNapit();
+
+      const discoToggle = document.getElementById('discoToggle');
+      discoToggle.addEventListener('change', () => {
+        if (discoToggle.checked) {
+          document.body.classList.add('disco');
+        } else {
+          document.body.classList.remove('disco');
+        }
+      });
+    };
+  </script>
+</body>
+</html>

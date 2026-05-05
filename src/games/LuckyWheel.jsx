@@ -29,13 +29,25 @@ function LuckyWheel({ onBack }) {
   const [showTasks, setShowTasks] = useState(false);
 
   const clickIntervalRef = useRef(null);
+  const musicRef = useRef(null);
 
   useEffect(() => {
+    musicRef.current = new Audio("/shiesty-app/sounds/spin-music.mp3");
+    musicRef.current.preload = "auto";
+
     const savedTasks = localStorage.getItem("luckywheel-tasks");
 
     if (savedTasks) {
       setTasks(JSON.parse(savedTasks));
     }
+
+    return () => {
+      stopClickClack();
+
+      if (musicRef.current) {
+        musicRef.current.pause();
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -43,18 +55,16 @@ function LuckyWheel({ onBack }) {
   }, [tasks]);
 
   function playClickSound() {
-    const click = new Audio("/sounds/click.mp3");
+    const click = new Audio("/shiesty-app/sounds/click.mp3");
     click.volume = 0.35;
     click.currentTime = 0;
     click.play().catch(() => {});
   }
 
   function startClickClack() {
-    let speed = 70;
-
     clickIntervalRef.current = setInterval(() => {
       playClickSound();
-    }, speed);
+    }, 70);
 
     setTimeout(() => {
       if (clickIntervalRef.current) {
@@ -74,13 +84,34 @@ function LuckyWheel({ onBack }) {
     }
   }
 
+  async function playSpinMusic() {
+    const music = musicRef.current;
+
+    if (!music) return;
+
+    try {
+      music.pause();
+      music.currentTime = 0;
+      music.volume = 0.8;
+      await music.play();
+    } catch (error) {
+      console.log("Musiikkia ei voitu käynnistää:", error);
+    }
+  }
+
+  function stopSpinMusic() {
+    const music = musicRef.current;
+
+    if (!music) return;
+
+    music.pause();
+    music.currentTime = 0;
+  }
+
   function spinWheel() {
     if (isSpinning) return;
 
-    const spinMusic = new Audio("/sounds/spin-music.mp3");
-    spinMusic.currentTime = 0;
-    spinMusic.volume = 0.7;
-    spinMusic.play().catch(() => {});
+    playSpinMusic();
 
     setIsSpinning(true);
     setSelectedTask("");
@@ -94,14 +125,16 @@ function LuckyWheel({ onBack }) {
     const randomIndex = Math.floor(Math.random() * sectorCount);
     const extraSpins = (6 + Math.floor(Math.random() * 5)) * 360;
 
-    const finalRotation =
-      extraSpins + (360 - randomIndex * sectorAngle) - sectorAngle / 2;
+    const normalizedRotation = ((rotation % 360) + 360) % 360;
+    const targetAngle = randomIndex * sectorAngle + sectorAngle / 2;
+    const deltaToTarget =
+      (360 - ((normalizedRotation + targetAngle) % 360)) % 360;
+    const finalRotation = extraSpins + deltaToTarget;
 
     setRotation((prevRotation) => prevRotation + finalRotation);
 
     setTimeout(() => {
-      spinMusic.pause();
-      spinMusic.currentTime = 0;
+      stopSpinMusic();
       stopClickClack();
 
       setWinningIndex(randomIndex);
@@ -134,8 +167,8 @@ function LuckyWheel({ onBack }) {
         Takaisin
       </button>
 
-      <h1>Luckywheel</h1>
-      <p>Pyöräytä ja anna kohtalon päättää.</p>
+      <h1>Lucky Wheel</h1>
+      <p>Spin that shit!</p>
 
       <div className={`wheel-area ${winningIndex !== null ? "winner-mode" : ""}`}>
         <div className="pointer">▼</div>
