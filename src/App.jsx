@@ -3,6 +3,8 @@ import "./App.css";
 import LuckyWheel from "./games/LuckyWheel";
 import WhosNext from "./games/WhosNext";
 import Jenga from "./games/Jenga";
+import Psykomaija from "./games/Psykomaija";
+import HerraHoo from "./games/HerraHoo";
 
 const logoSrc = `${import.meta.env.BASE_URL}logo2.png`;
 
@@ -39,6 +41,10 @@ function App() {
 
           <button onClick={() => setCurrentGame("jenga")}>Jenga</button>
 
+          <button onClick={() => setCurrentGame("psykomaija")}>Psykomaija</button>
+
+          <button onClick={() => setCurrentGame("herrahoo")}>Herra Hoo</button>
+
           <button
             className="copyright-link"
             onClick={() => setCurrentGame("copyright")}
@@ -58,6 +64,14 @@ function App() {
 
       {currentGame === "jenga" && (
         <Jenga onBack={() => setCurrentGame("menu")} theme={theme} />
+      )}
+
+      {currentGame === "psykomaija" && (
+        <Psykomaija onBack={() => setCurrentGame("menu")} />
+      )}
+
+      {currentGame === "herrahoo" && (
+        <HerraHoo onBack={() => setCurrentGame("menu")} />
       )}
 
       {currentGame === "copyright" && (

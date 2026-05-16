@@ -1,0 +1,273 @@
+.herrahoo-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.05), transparent 40%),
+    linear-gradient(180deg, rgba(20, 0, 40, 0.96) 0%, rgba(5, 0, 10, 1) 100%);
+}
+
+.herrahoo-card {
+  width: min(100%, 720px);
+  padding: 30px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(4, 0, 35, 0.92);
+  box-shadow: 0 0 40px rgba(146, 0, 255, 0.12);
+  color: #f0f8ff;
+}
+
+.herrahoo-card h1 {
+  margin: 0 0 10px;
+  color: #ff88ff;
+  text-shadow: 0 0 18px #ff88ff, 0 0 40px rgba(0, 255, 255, 0.3);
+  font-family: "Orbitron", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.herrahoo-intro {
+  margin: 0 0 20px;
+  color: #c8f8ff;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.herrahoo-controls {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.herrahoo-controls label {
+  display: grid;
+  gap: 10px;
+  color: #c8f8ff;
+}
+
+.herrahoo-controls input {
+  width: 100%;
+  max-width: 120px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.5);
+  color: #f5fbff;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.herrahoo-card button {
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  background: rgba(0, 255, 255, 0.08);
+  color: #c8f8ff;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.herrahoo-card button:hover {
+  background: rgba(0, 255, 255, 0.16);
+  transform: translateY(-1px);
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+  border-color: #ff00ff;
+  background: rgba(255, 0, 255, 0.12);
+  color: #ff00ff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.45);
+}
+
+.current-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 22px;
+  border-radius: 22px;
+  background: rgba(0, 0, 0, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 22px;
+}
+
+.card-label {
+  font-size: 0.95rem;
+  color: #a8f0ff;
+}
+
+.current-card strong {
+  font-size: 1.35rem;
+  color: #ff99ff;
+}
+
+.card-count {
+  color: #cbdfff;
+}
+
+.card-visual {
+  position: relative;
+  width: 220px;
+  max-width: 46vw;
+  aspect-ratio: 3 / 4;
+  margin: 12px auto;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(240,245,255,0.95) 0%, rgba(200,220,255,0.92) 100%);
+  border: 2px solid rgba(180,200,255,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.3);
+  overflow: hidden;
+}
+
+.card-logo {
+  width: 110%;
+  opacity: 0.92;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6));
+}
+
+.card-suit {
+  position: absolute;
+  font-size: 1.35rem;
+  color: #ffddff;
+  text-shadow: 0 0 8px rgba(255,255,255,0.06);
+}
+
+.card-suit-top {
+  top: 8px;
+  left: 10px;
+}
+
+.card-rank {
+  position: absolute;
+  font-size: 1.1rem;
+  color: #ffd6ff;
+  font-weight: 700;
+}
+
+.card-rank-bottom {
+  bottom: 8px;
+  right: 10px;
+}
+
+/* Corners */
+.corner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  padding: 8px 6px;
+  line-height: 0.95;
+}
+
+.corner .corner-rank {
+  font-weight: 900;
+  font-size: 1.35rem;
+  text-shadow: 
+    -1px -1px 0 rgba(20,20,30,0.8),
+    1px -1px 0 rgba(20,20,30,0.8),
+    -1px 1px 0 rgba(20,20,30,0.8),
+    1px 1px 0 rgba(20,20,30,0.8),
+    -2px 0 0 rgba(20,20,30,0.6),
+    2px 0 0 rgba(20,20,30,0.6),
+    0 -2px 0 rgba(20,20,30,0.6),
+    0 2px 0 rgba(20,20,30,0.6);
+}
+
+.corner .corner-suit {
+  font-size: 1.7rem;
+  text-shadow: 
+    -1px -1px 0 rgba(20,20,30,0.8),
+    1px -1px 0 rgba(20,20,30,0.8),
+    -1px 1px 0 rgba(20,20,30,0.8),
+    1px 1px 0 rgba(20,20,30,0.8),
+    -2px 0 0 rgba(20,20,30,0.6),
+    2px 0 0 rgba(20,20,30,0.6),
+    0 -2px 0 rgba(20,20,30,0.6),
+    0 2px 0 rgba(20,20,30,0.6);
+}
+
+.corner-top-left {
+  top: 10px;
+  left: 10px;
+  align-items: flex-start;
+}
+
+.corner-bottom-right {
+  bottom: 10px;
+  right: 10px;
+  transform: rotate(180deg);
+  align-items: flex-end;
+}
+
+/* Suit colors (Y2K glow variants) */
+.card-visual.spade {
+  --accent: #66d4ff;
+  box-shadow: 0 8px 30px rgba(102,212,255,0.12);
+}
+.card-visual.heart {
+  --accent: #ff77b3;
+  box-shadow: 0 8px 30px rgba(255,119,179,0.12);
+}
+.card-visual.diamond {
+  --accent: #7effa0;
+  box-shadow: 0 8px 30px rgba(126,255,160,0.12);
+}
+.card-visual.club {
+  --accent: #c59bff;
+  box-shadow: 0 8px 30px rgba(197,155,255,0.12);
+}
+
+.card-visual .corner-rank,
+.card-visual .corner-suit {
+  color: var(--accent);
+  text-shadow: 
+    -1px -1px 0 rgba(20,20,30,0.8),
+    1px -1px 0 rgba(20,20,30,0.8),
+    -1px 1px 0 rgba(20,20,30,0.8),
+    1px 1px 0 rgba(20,20,30,0.8),
+    -2px 0 0 rgba(20,20,30,0.6),
+    2px 0 0 rgba(20,20,30,0.6),
+    0 -2px 0 rgba(20,20,30,0.6),
+    0 2px 0 rgba(20,20,30,0.6);
+}
+
+.rule-box {
+  padding: 22px;
+  border-radius: 22px;
+  background: rgba(12, 4, 60, 0.96);
+  border: 1px solid rgba(0, 255, 255, 0.12);
+  color: #e8f7ff;
+  line-height: 1.8;
+}
+
+.rule-box p {
+  margin: 0 0 12px;
+}
+
+.rule-box p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 720px) {
+  .herrahoo-page {
+    padding: 16px;
+  }
+
+  .button-row {
+    flex-direction: column;
+  }
+}
