@@ -5,17 +5,23 @@ import WhosNext from "./games/WhosNext";
 import Jenga from "./games/Jenga";
 import Psykomaija from "./games/Psykomaija";
 import HerraHoo from "./games/HerraHoo";
+import Hevosravit from "./games/Hevosravit";
 
-const logoSrc = `${import.meta.env.BASE_URL}logo2.png`;
+const defaultLogo = `${import.meta.env.BASE_URL}logo2.png`;
+const cigarLogo = `${import.meta.env.BASE_URL}logo-cigar.png`;
 
 function App() {
   const [currentGame, setCurrentGame] = useState("menu");
   const [theme, setTheme] = useState("y2k");
+  const logoSrc = theme === "cigar" ? cigarLogo : defaultLogo;
 
   return (
-    <div className={`app ${theme === "classic" ? "theme-classic" : "theme-y2k"}`}>
-      <button className="theme-toggle" onClick={() => setTheme((prev) => (prev === "y2k" ? "classic" : "y2k"))}>
-        Teema: {theme === "y2k" ? "Y2K" : "Perinteinen"}
+    <div className={`app ${theme === "cigar" ? "theme-cigar" : "theme-y2k"}`}>
+      <button
+        className="theme-toggle"
+        onClick={() => setTheme((prev) => (prev === "y2k" ? "cigar" : "y2k"))}
+      >
+        Teema: {theme === "cigar" ? "Sikarihuone" : "Y2K"}
       </button>
       {currentGame === "menu" && (
         <div className="menu">
@@ -45,6 +51,8 @@ function App() {
 
           <button onClick={() => setCurrentGame("herrahoo")}>Herra Hoo</button>
 
+          <button onClick={() => setCurrentGame("hevosravit")}>Ravit</button>
+
           <button
             className="copyright-link"
             onClick={() => setCurrentGame("copyright")}
@@ -72,6 +80,10 @@ function App() {
 
       {currentGame === "herrahoo" && (
         <HerraHoo onBack={() => setCurrentGame("menu")} />
+      )}
+
+      {currentGame === "hevosravit" && (
+        <Hevosravit onBack={() => setCurrentGame("menu")} />
       )}
 
       {currentGame === "copyright" && (

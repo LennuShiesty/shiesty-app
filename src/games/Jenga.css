@@ -17,7 +17,7 @@
   width: 64px;
   height: auto;
   border-radius: 12px;
-  box-shadow: 0 0 18px rgba(0, 255, 255, 0.16);
+  box-shadow: 0 0 10px rgba(255,0,255,0.18);
   z-index: 2;
 }
 
@@ -28,8 +28,8 @@
   margin: 72px auto 6px;
   border-radius: 16px;
   box-shadow:
-    0 0 26px rgba(0, 255, 255, 0.18),
-    0 18px 60px rgba(0, 0, 0, 0.42);
+    0 0 18px rgba(255,0,255,0.16),
+    0 12px 40px rgba(0, 0, 0, 0.36);
 }
 
 .jenga-controls {
@@ -51,8 +51,8 @@
   width: 100%;
   min-width: 180px;
   max-width: 320px;
-  border: 2px solid #4f3b25;
-  background: rgba(244, 215, 175, 0.14);
+  border: 2px solid rgba(255,0,255,0.4);
+  background: rgba(255,0,255,0.1);
   color: #f8f8ff;
   border-radius: 14px;
   padding: 12px 14px;
@@ -85,25 +85,25 @@
   width: 100%;
   min-height: 48px;
   border-radius: 12px;
-  border: 1px solid #3f3526;
-  background: #e6c190;
-  color: #2c1c0e;
+  border: 1px solid rgba(255,0,255,0.35);
+  background: rgba(40, 0, 80, 0.9);
+  color: #e5e5ff;
   font-weight: 700;
   cursor: pointer;
   transition: transform 0.2s ease, background 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .jenga-number:hover:not(:disabled) {
   transform: translateY(-1px);
-  background: #f8dbb8;
+  background: rgba(115, 0, 155, 0.95);
 }
 
 .jenga-number.selected {
-  background: #c78b4e;
-  color: #140b04;
-  border-color: #8d5a2f;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12), 0 0 18px rgba(140, 88, 36, 0.25);
+  background: #9a00ff;
+  color: #f8f8ff;
+  border-color: #6b00d4;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12), 0 0 18px rgba(255,0,255,0.3);
 }
 
 .jenga-number:disabled {
@@ -129,14 +129,14 @@
 
 .jenga-task-card {
   position: relative;
-  background: #d3a469;
-  border: 2px solid #7e5837;
+  background: rgba(60, 0, 90, 0.95);
+  border: 2px solid rgba(255,0,255,0.3);
   box-shadow: 0 16px 34px rgba(0, 0, 0, 0.32), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
     linear-gradient(transparent 22px, rgba(0, 0, 0, 0.08) 22px),
-    radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.08), transparent 10%),
-    radial-gradient(circle at 78% 68%, rgba(0, 0, 0, 0.07), transparent 14%);
+    radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.06), transparent 10%),
+    radial-gradient(circle at 78% 68%, rgba(255,0,255,0.06), transparent 14%);
   background-size: 100% 28px, 100% 100%, 110% 120%, 140% 140%;
 }
 
@@ -149,7 +149,7 @@
   line-height: 46px;
   text-align: center;
   border-radius: 14px;
-  background: rgba(57, 34, 15, 0.96);
+  background: rgba(170, 0, 240, 0.96);
   color: #ffe7c8;
   font-weight: 800;
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -157,22 +157,22 @@
 
 .jenga-task-text {
   font-size: 1.16rem;
-  color: #43260e;
+  color: #e7d4ff;
   line-height: 1.7;
   max-width: 92%;
   margin: 0 auto;
 }
 
 .jenga-task-placeholder {
-  background: rgba(243, 230, 206, 0.16);
-  border: 1px dashed rgba(101, 66, 42, 0.28);
-  color: #5c3d20;
+  background: rgba(145, 50, 200, 0.12);
+  border: 1px dashed rgba(255,0,255,0.32);
+  color: #d4c8ff;
 }
 
 .jenga-back {
-  border: 2px solid #8c5f37;
-  background: rgba(214, 175, 120, 0.18);
-  color: #331e09;
+  border: 2px solid rgba(255,0,255,0.8);
+  background: rgba(255,0,255,0.14);
+  color: #f0f0ff;
   padding: 14px 18px;
   border-radius: 14px;
   width: min(320px, 100%);
@@ -180,44 +180,52 @@
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
 }
 
-.jenga-screen.theme-classic {
-  background: radial-gradient(circle at top center, #262626, #0e0e0e 55%, #050505 100%);
+.jenga-screen.theme-cigar {
+  background: linear-gradient(180deg, #120b05 0%, #090502 58%, #040200 100%);
 }
 
-.jenga-screen.theme-classic .jenga-number {
-  background: #2b2b2b;
-  border-color: #555;
-  color: #f4f4f4;
+.jenga-screen.theme-cigar .jenga-number {
+  background: #2c1a0c;
+  border-color: rgba(160,100,40,0.8);
+  color: #e7d4b7;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
-.jenga-screen.theme-classic .jenga-number:hover:not(:disabled) {
-  background: #3b3b3b;
+.jenga-screen.theme-cigar .jenga-number:hover:not(:disabled) {
+  background: #3d2714;
 }
 
-.jenga-screen.theme-classic .jenga-number.selected {
-  background: #a4b0ba;
-  border-color: #d1d8e0;
-  color: #111;
+.jenga-screen.theme-cigar .jenga-number.selected {
+  background: #4f3d24;
+  color: #f7edd6;
+  border-color: #7e5837;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.18), 0 0 8px rgba(42,168,107,0.12);
+}
+
+.jenga-screen.theme-cigar .jenga-task-card,
+.jenga-screen.theme-cigar .jenga-task-placeholder {
+  background: rgba(20, 12, 8, 0.96);
+  border-color: rgba(140, 95, 40, 0.25);
+}
+
+.jenga-screen.theme-cigar .jenga-back {
+  border-color: rgba(160,100,40,0.9);
+  background: rgba(50,30,15,0.9);
+  color: #e7d4b7;
+}
+
+.jenga-screen.theme-cigar .jenga-mode select {
+  border-color: rgba(160,100,40,0.8);
+  background: rgba(45, 30, 20, 0.9);
+  color: #e7d4b7;
   box-shadow: none;
 }
 
-.jenga-screen.theme-classic .jenga-task-card {
-  background: rgba(24, 24, 24, 0.97);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 18px rgba(0, 0, 0, 0.3);
+.jenga-screen.theme-cigar .jenga-top-logo,
+.jenga-screen.theme-cigar .jenga-logo {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.24);
 }
 
-.jenga-screen.theme-classic .jenga-task-placeholder {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.08);
-  color: #ccc;
-}
-
-.jenga-screen.theme-classic .jenga-back {
-  border-color: #888;
-  background: rgba(255, 255, 255, 0.08);
-  color: #f4f4f4;
-}
 
 @media (max-width: 640px) {
   .jenga-screen {

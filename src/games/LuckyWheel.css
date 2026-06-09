@@ -2,8 +2,8 @@
   min-height: 100vh;
   padding: 20px;
   text-align: center;
-  background: linear-gradient(135deg, #000000 0%, #0a0015 50%, #000000 100%);
-  color: #00ffff;
+  background: linear-gradient(180deg, rgba(8,0,30,1) 0%, rgba(2,0,18,1) 60%, rgba(0,0,0,1) 100%);
+  color: var(--muted);
   font-family: "Orbitron", Arial, sans-serif;
   position: relative;
 }
@@ -17,10 +17,10 @@
   height: 100%;
   background: repeating-linear-gradient(
     0deg,
-    rgba(255, 0, 255, 0.03) 0px,
+    rgba(255,0,255,0.05) 0px,
     transparent 2px,
     transparent 4px,
-    rgba(255, 0, 255, 0.03) 6px
+    rgba(0,255,255,0.04) 6px
   );
   pointer-events: none;
   z-index: 1;
@@ -31,9 +31,9 @@
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(circle at 16% 20%, rgba(255, 0, 255, 0.16), transparent 12%),
-    radial-gradient(circle at 82% 18%, rgba(0, 255, 255, 0.12), transparent 10%),
-    radial-gradient(circle at 52% 80%, rgba(255, 102, 0, 0.08), transparent 16%);
+    radial-gradient(circle at 16% 20%, rgba(255,0,255,0.1), transparent 12%),
+    radial-gradient(circle at 82% 18%, rgba(0,255,255,0.1), transparent 10%),
+    radial-gradient(circle at 52% 80%, rgba(255,0,255,0.05), transparent 16%);
   pointer-events: none;
   z-index: 1;
 }
@@ -42,32 +42,32 @@
   position: absolute;
   top: 20px;
   left: 20px;
-  background: rgba(255, 0, 255, 0.1);
-  border: 2px solid #ff00ff;
-  color: #ff00ff;
-  box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+  background: var(--button-bg);
+  border: 2px solid var(--button-border);
+  color: var(--title-color);
+  box-shadow: 0 0 14px rgba(0,0,0,0.35);
   z-index: 50;
 }
 
 .back-button:hover {
-  background: rgba(255, 0, 255, 0.25);
-  box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
+  background: rgba(255,0,255,0.18);
+  box-shadow: 0 0 20px rgba(255,0,255,0.22);
 }
 
 .luckywheel-page h1 {
   margin-top: 70px;
   font-size: 42px;
-  color: #ff00ff;
-  text-shadow: 
-    0 0 10px #ff00ff,
-    0 0 20px #ff00ff,
-    0 0 40px #ff00ff,
-    0 0 60px #00ffff;
+  color: var(--title-color);
+  text-shadow:
+    0 0 10px var(--title-glow-1),
+    0 0 20px var(--title-glow-1),
+    0 0 40px var(--title-glow-1),
+    0 0 60px var(--title-glow-2);
 }
 
 .luckywheel-page p {
-  color: #00ffff;
-  text-shadow: 0 0 8px #00ffff;
+  color: var(--muted);
+  text-shadow: none;
 }
 
 .wheel-area {
@@ -85,38 +85,92 @@
   top: 0;
   z-index: 20;
   font-size: 36px;
-  color: #a500ff;
-  text-shadow: 
-    0 0 14px #a500ff,
-    0 0 26px #00ffff;
+  color: var(--accent-1);
+  text-shadow:
+    0 0 14px var(--accent-1),
+    0 0 26px var(--accent-primary);
 }
 
 .wheel {
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  border: 8px solid rgba(0, 255, 255, 0.7);
+  border: 8px solid rgba(0,0,0,0.22);
   position: relative;
   overflow: hidden;
   background: conic-gradient(
     from -90deg,
-    #ff00ff 0deg 30deg,
-    #00d4ff 30deg 60deg,
-    #9a00ff 60deg 90deg,
-    #ff00ff 90deg 120deg,
-    #00d4ff 120deg 150deg,
-    #9a00ff 150deg 180deg,
-    #ff00ff 180deg 210deg,
-    #00d4ff 210deg 240deg,
-    #9a00ff 240deg 270deg,
-    #ff00ff 270deg 300deg,
-    #00d4ff 300deg 330deg,
-    #9a00ff 330deg 360deg
+    var(--accent-1) 0deg 30deg,
+    var(--accent-2) 30deg 60deg,
+    var(--accent-3) 60deg 90deg,
+    var(--accent-1) 90deg 120deg,
+    var(--accent-2) 120deg 150deg,
+    var(--accent-3) 150deg 180deg,
+    var(--accent-1) 180deg 210deg,
+    var(--accent-2) 210deg 240deg,
+    var(--accent-3) 240deg 270deg,
+    var(--accent-1) 270deg 300deg,
+    var(--accent-2) 300deg 330deg,
+    var(--accent-3) 330deg 360deg
   );
-  box-shadow: 
-    0 0 40px rgba(255, 0, 255, 0.6),
-    0 0 80px rgba(0, 212, 255, 0.45),
-    inset 0 0 40px rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 40px rgba(0,0,0,0.5),
+    0 0 80px rgba(0,0,0,0.3),
+    inset 0 0 40px rgba(255, 255, 255, 0.03);
+}
+
+.app.theme-cigar .wheel {
+  background: conic-gradient(
+    from -90deg,
+    #7f1919 0deg 30deg,
+    #1d4b27 30deg 60deg,
+    #7f1919 60deg 90deg,
+    #1d4b27 90deg 120deg,
+    #7f1919 120deg 150deg,
+    #1d4b27 150deg 180deg,
+    #7f1919 180deg 210deg,
+    #1d4b27 210deg 240deg,
+    #7f1919 240deg 270deg,
+    #1d4b27 270deg 300deg,
+    #7f1919 300deg 330deg,
+    #1d4b27 330deg 360deg
+  );
+}
+
+.app.theme-cigar .luckywheel-page {
+  background: linear-gradient(180deg, #1b1208 0%, #0f0a07 60%, #060504 100%);
+}
+
+.app.theme-cigar .luckywheel-page::before {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(160,100,40,0.05) 0px,
+    transparent 2px,
+    transparent 4px,
+    rgba(160,100,40,0.04) 6px
+  );
+}
+
+.app.theme-cigar .luckywheel-page::after {
+  background:
+    radial-gradient(circle at 16% 20%, rgba(160,100,40,0.12), transparent 12%),
+    radial-gradient(circle at 82% 18%, rgba(80,50,30,0.12), transparent 10%),
+    radial-gradient(circle at 52% 80%, rgba(160,100,40,0.05), transparent 16%);
+}
+
+.app.theme-cigar .back-button:hover {
+  background: rgba(160,100,40,0.18);
+  box-shadow: 0 0 20px rgba(160,100,40,0.22);
+}
+
+.app.theme-cigar .task-button {
+  background: rgba(80,50,30,0.12);
+  border-color: rgba(160,100,40,0.35);
+}
+
+.app.theme-cigar .task-button:hover {
+  background: rgba(160,100,40,0.18);
+  box-shadow: 0 0 12px rgba(160,100,40,0.22);
 }
 
 .wheel::before {
@@ -150,24 +204,24 @@
 
 .winner-mode .wheel {
   box-shadow:
-    0 0 50px rgba(255, 0, 255, 0.95),
-    0 0 110px rgba(0, 212, 255, 0.8),
-    inset 0 0 70px rgba(255, 0, 255, 0.35);
+    0 0 50px rgba(0,0,0,0.9),
+    0 0 110px rgba(0,0,0,0.7),
+    inset 0 0 70px rgba(255, 255, 255, 0.06);
   animation: wheelPulse 1s ease-in-out infinite;
 }
 
 @keyframes wheelPulse {
   0%, 100% {
     box-shadow:
-      0 0 50px rgba(255, 0, 255, 0.9),
-      0 0 100px rgba(0, 255, 255, 0.6),
-      inset 0 0 50px rgba(255, 0, 255, 0.3);
+      0 0 50px rgba(0,0,0,0.88),
+      0 0 100px rgba(0,0,0,0.7),
+      inset 0 0 50px rgba(255,255,255,0.03);
   }
   50% {
     box-shadow:
-      0 0 70px rgba(255, 0, 255, 1),
-      0 0 130px rgba(0, 255, 255, 0.8),
-      inset 0 0 70px rgba(255, 0, 255, 0.5);
+      0 0 70px rgba(0,0,0,0.95),
+      0 0 130px rgba(0,0,0,0.8),
+      inset 0 0 70px rgba(255,255,255,0.05);
   }
 }
 
@@ -208,20 +262,26 @@
   font-weight: bold;
   font-size: 20px;
   text-shadow: 
-    0 0 8px #000,
-    0 0 4px rgba(255, 0, 255, 0.6);
+    0 0 8px rgba(0,0,0,0.7),
+    0 0 4px rgba(125,90,45,0.25);
   z-index: 3;
 }
 
 .winning-label {
-  color: #00ff00;
+  color: var(--accent-primary);
   text-shadow:
-    0 0 8px #00ff00,
-    0 0 16px #00ff00,
-    0 0 24px #39ff14;
+    0 0 8px rgba(0,255,255,0.55),
+    0 0 16px rgba(0,255,255,0.35),
+    0 0 24px rgba(0,255,255,0.2);
   animation: labelPulse 0.6s ease-in-out infinite alternate;
 }
-
+.app.theme-cigar .winning-label {
+  color: #c49d68;
+  text-shadow:
+    0 0 8px rgba(160,100,40,0.45),
+    0 0 16px rgba(160,100,40,0.3),
+    0 0 24px rgba(160,100,40,0.18);
+}
 @keyframes labelPulse {
   from {
     filter: brightness(1);
@@ -238,17 +298,17 @@
   font-size: 20px;
   padding: 16px 30px;
   margin-bottom: 20px;
-  border: 2px solid #00ffff;
-  background: rgba(0, 255, 255, 0.1);
-  color: #00ffff;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+  border: 2px solid var(--button-border);
+  background: var(--button-bg);
+  color: var(--accent-primary);
+  box-shadow: 0 0 20px rgba(0,0,0,0.45);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
 .spin-button:hover:not(:disabled) {
-  background: rgba(0, 255, 255, 0.25);
-  box-shadow: 0 0 30px rgba(0, 255, 255, 0.9);
+  background: rgba(255,0,255,0.18);
+  box-shadow: 0 0 30px rgba(255,0,255,0.35);
 }
 
 .result {
@@ -266,16 +326,16 @@
 }
 
 .task-toggle-button {
-  border: 2px solid #ff00ff;
-  background: rgba(255, 0, 255, 0.1);
-  color: #ff00ff;
-  box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+  border: 2px solid var(--button-border);
+  background: var(--button-bg);
+  color: var(--title-color);
+  box-shadow: 0 0 15px rgba(0,0,0,0.45);
   text-transform: uppercase;
 }
 
 .task-toggle-button:hover {
-  background: rgba(255, 0, 255, 0.25);
-  box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
+  background: rgba(255,0,255,0.18);
+  box-shadow: 0 0 18px rgba(255,0,255,0.28);
 }
 
 .task-list-content {
@@ -286,17 +346,17 @@
 }
 
 .task-button {
-  background: rgba(0, 255, 255, 0.05);
-  border: 1px solid #00ffff;
-  color: #00ffff;
+  background: rgba(255,0,255,0.08);
+  border: 1px solid rgba(255,0,255,0.35);
+  color: var(--muted);
   text-align: left;
   font-size: 16px;
-  text-shadow: 0 0 6px #00ffff;
+  text-shadow: none;
 }
 
 .task-button:hover {
-  background: rgba(0, 255, 255, 0.15);
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.4);
+  background: rgba(255,0,255,0.16);
+  box-shadow: 0 0 12px rgba(255,0,255,0.22);
 }
 
 .edit-modal {
@@ -312,18 +372,18 @@
 }
 
 .edit-box {
-  background: rgba(10, 0, 20, 0.95);
+  background: var(--surface-bg);
   padding: 24px;
   border-radius: 12px;
   width: 100%;
   max-width: 420px;
-  border: 2px solid #ff00ff;
-  box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+  border: 2px solid var(--surface-border);
+  box-shadow: 0 0 28px var(--surface-glow);
 }
 
 .edit-box h2 {
-  color: #ff00ff;
-  text-shadow: 0 0 10px #ff00ff;
+  color: var(--title-color);
+  text-shadow: none;
 }
 
 .edit-box textarea {
@@ -332,17 +392,17 @@
   padding: 12px;
   font-size: 16px;
   resize: none;
-  border: 1px solid #00ffff;
-  background: rgba(0, 255, 255, 0.05);
-  color: #00ffff;
+  border: 1px solid var(--surface-border);
+  background: rgba(255,0,255,0.08);
+  color: var(--muted);
   margin-bottom: 16px;
-  text-shadow: 0 0 4px #00ffff;
+  text-shadow: none;
 }
 
 .edit-box textarea:focus {
   outline: none;
-  border-color: #ff00ff;
-  box-shadow: 0 0 12px rgba(255, 0, 255, 0.4);
+  border-color: var(--surface-border);
+  box-shadow: 0 0 12px var(--surface-glow);
 }
 
 .edit-buttons {
@@ -352,14 +412,14 @@
 }
 
 .cancel-button {
-  border: 1px solid #666;
-  background: rgba(100, 100, 100, 0.1);
-  color: #888;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  color: #ddd;
 }
 
 .cancel-button:hover {
-  background: rgba(100, 100, 100, 0.2);
-  box-shadow: 0 0 12px rgba(100, 100, 100, 0.3);
+  background: rgba(255,255,255,0.16);
+  box-shadow: 0 0 12px rgba(255,255,255,0.18);
 }
 
 .task-popover {
@@ -381,43 +441,43 @@
   max-width: 430px;
   padding: 34px 26px;
   border-radius: 12px;
-  background: rgba(10, 0, 20, 0.95);
-  border: 2px solid #ff00ff;
+  background: var(--surface-bg);
+  border: 2px solid var(--surface-border);
   box-shadow:
-    0 0 40px rgba(255, 0, 255, 0.6),
-    0 0 80px rgba(0, 255, 255, 0.3);
+    0 0 30px var(--surface-glow),
+    0 0 55px rgba(0,0,0,0.18);
   text-align: center;
   animation: taskPop 0.55s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
 .task-label {
   margin: 0 0 10px;
-  color: #00ffff;
+  color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: bold;
   font-size: 14px;
-  text-shadow: 0 0 8px #00ffff;
+  text-shadow: none;
 }
 
 .task-card h2 {
   margin: 0 0 26px;
   font-size: 38px;
   line-height: 1.1;
-  color: #ff00ff;
-  text-shadow: 0 0 10px #ff00ff;
+  color: var(--title-color);
+  text-shadow: none;
 }
 
 .task-card button {
-  border: 2px solid #00ffff;
-  background: rgba(0, 255, 255, 0.1);
-  color: #00ffff;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+  border: 2px solid var(--surface-border);
+  background: rgba(255,0,255,0.15);
+  color: var(--accent-primary);
+  box-shadow: 0 0 15px rgba(255,0,255,0.22);
 }
 
 .task-card button:hover {
-  background: rgba(0, 255, 255, 0.25);
-  box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+  background: rgba(255,0,255,0.23);
+  box-shadow: 0 0 25px rgba(255,0,255,0.32);
 }
 
 @keyframes taskPop {

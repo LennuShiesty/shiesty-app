@@ -9,20 +9,30 @@
     linear-gradient(180deg, rgba(20, 0, 40, 0.96) 0%, rgba(5, 0, 10, 1) 100%);
 }
 
+.app.theme-cigar .herrahoo-page {
+  background: linear-gradient(180deg, rgba(22, 12, 6, 0.95) 0%, rgba(9, 4, 2, 0.98) 100%);
+}
+
 .herrahoo-card {
   width: min(100%, 720px);
   padding: 30px;
   border-radius: 28px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(4, 0, 35, 0.92);
-  box-shadow: 0 0 40px rgba(146, 0, 255, 0.12);
+  box-shadow: 0 0 40px rgba(146, 0, 255, 0.18);
   color: #f0f8ff;
+}
+
+.app.theme-cigar .herrahoo-card {
+  border: 1px solid rgba(160,100,40,0.35);
+  background: rgba(18, 10, 6, 0.9);
+  box-shadow: 0 0 26px rgba(160,100,40,0.14);
 }
 
 .herrahoo-card h1 {
   margin: 0 0 10px;
-  color: #ff88ff;
-  text-shadow: 0 0 18px #ff88ff, 0 0 40px rgba(0, 255, 255, 0.3);
+  color: var(--title-color);
+  text-shadow: 0 0 18px var(--title-glow-1), 0 0 40px var(--title-glow-2);
   font-family: "Orbitron", "Segoe UI", Arial, sans-serif;
   font-size: clamp(2rem, 4vw, 3rem);
 }
@@ -65,16 +75,26 @@
 .herrahoo-card button {
   padding: 14px 18px;
   border-radius: 14px;
-  border: 1px solid rgba(0, 255, 255, 0.2);
-  background: rgba(0, 255, 255, 0.08);
-  color: #c8f8ff;
+  border: 1px solid rgba(255,0,255,0.45);
+  background: rgba(255,0,255,0.12);
+  color: var(--muted);
   cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .herrahoo-card button:hover {
-  background: rgba(0, 255, 255, 0.16);
+  background: rgba(255,0,255,0.2);
   transform: translateY(-1px);
+}
+
+.app.theme-cigar .herrahoo-card button {
+  border: 1px solid rgba(160,100,40,0.7);
+  background: rgba(160,100,40,0.12);
+  color: #e7d4b7;
+}
+
+.app.theme-cigar .herrahoo-card button:hover {
+  background: rgba(160,100,40,0.22);
 }
 
 .back-button {
@@ -82,12 +102,12 @@
   top: 20px;
   left: 20px;
   z-index: 2;
-  border-color: #ff00ff;
-  background: rgba(255, 0, 255, 0.12);
-  color: #ff00ff;
+  border-color: rgba(255,0,255,0.9);
+  background: rgba(255,0,255,0.14);
+  color: var(--title-color);
   padding: 10px 14px;
   border-radius: 8px;
-  box-shadow: 0 0 15px rgba(255, 0, 255, 0.45);
+  box-shadow: 0 0 14px rgba(255,0,255,0.22);
 }
 
 .current-card {
@@ -132,6 +152,15 @@
   overflow: hidden;
 }
 
+.app.theme-cigar .card-visual {
+  background: linear-gradient(180deg, rgba(35, 23, 16, 0.96) 0%, rgba(20, 12, 8, 0.95) 100%);
+  border: 2px solid rgba(160,100,40,0.4);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+}
+.app.theme-cigar .current-card {
+  background: rgba(18, 10, 6, 0.75);
+  border: 1px solid rgba(160,100,40,0.18);
+}
 .card-logo {
   width: 110%;
   opacity: 0.92;
@@ -213,27 +242,36 @@
   align-items: flex-end;
 }
 
-/* Suit colors (Y2K glow variants) */
+/* Suit colors now use theme variables. To quickly test an emerald card color,
+   either set the variables in App.css (recommended), or uncomment the
+   example below to force emerald locally for all suits during testing.
+
+   Example local override (uncomment to test):
+   .card-visual { --accent: #2aa86b; }
+*/
+
 .card-visual.spade {
-  --accent: #66d4ff;
-  box-shadow: 0 8px 30px rgba(102,212,255,0.12);
+  --accent: var(--card-spade-color, #66d4ff);
+  box-shadow: 0 8px 30px var(--card-spade-color, rgba(102,212,255,0.12));
 }
 .card-visual.heart {
-  --accent: #ff77b3;
-  box-shadow: 0 8px 30px rgba(255,119,179,0.12);
+  --accent: var(--card-heart-color, #ff77b3);
+  box-shadow: 0 8px 30px var(--card-heart-color, rgba(255,119,179,0.12));
 }
 .card-visual.diamond {
-  --accent: #7effa0;
-  box-shadow: 0 8px 30px rgba(126,255,160,0.12);
+  --accent: var(--card-diamond-color, #7effa0);
+  box-shadow: 0 8px 30px var(--card-diamond-color, rgba(126,255,160,0.12));
 }
 .card-visual.club {
-  --accent: #c59bff;
-  box-shadow: 0 8px 30px rgba(197,155,255,0.12);
+  --accent: var(--card-club-color, #c59bff);
+  box-shadow: 0 8px 30px var(--card-club-color, rgba(197,155,255,0.12));
 }
 
 .card-visual .corner-rank,
 .card-visual .corner-suit {
   color: var(--accent);
+  -webkit-text-stroke: 1.5px rgba(20,20,30,0.85);
+  text-stroke: 1.5px rgba(20,20,30,0.85);
   text-shadow: 
     -1px -1px 0 rgba(20,20,30,0.8),
     1px -1px 0 rgba(20,20,30,0.8),
@@ -245,12 +283,22 @@
     0 2px 0 rgba(20,20,30,0.6);
 }
 
+/* Inner edge stroke to visually outline the card */
+.card-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 3px rgba(10,10,20,0.45);
+}
+
 .rule-box {
   padding: 22px;
   border-radius: 22px;
   background: rgba(12, 4, 60, 0.96);
-  border: 1px solid rgba(0, 255, 255, 0.12);
-  color: #e8f7ff;
+  border: 1px solid rgba(255,0,255,0.14);
+  color: var(--muted);
   line-height: 1.8;
 }
 

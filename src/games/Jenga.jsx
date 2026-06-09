@@ -94,7 +94,7 @@ function Jenga({ onBack, theme }) {
     showTask(randomNumber);
   };
 
-  const themeClass = theme === "classic" ? "theme-classic" : "theme-y2k";
+  const themeClass = theme === "cigar" ? "theme-cigar" : "theme-y2k";
 
   return (
     <div className={`jenga-screen ${themeClass}`}>

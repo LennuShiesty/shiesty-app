@@ -1,0 +1,371 @@
+.hevosravit-page {
+  position: relative;
+  padding: 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.hevosravit-card {
+  width: min(980px, 98%);
+  background: rgba(6, 0, 35, 0.94);
+  color: #c8f8ff;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,0,255,0.18);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.35);
+}
+
+.hevosravit-card h1 { margin: 0 0 12px; color: var(--title-color); font-family: "Orbitron", "Segoe UI", Arial, sans-serif; }
+
+.card-visual {
+  position: relative;
+  width: 180px;
+  aspect-ratio: 3 / 4;
+  margin: 12px auto;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(18, 0, 70, 0.94) 0%, rgba(8, 0, 30, 0.95) 100%);
+  border: 2px solid rgba(255,0,255,0.24);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.35), inset 0 1px 2px rgba(255,255,255,0.3);
+  overflow: hidden;
+}
+
+.app.theme-cigar .card-visual {
+  background: linear-gradient(180deg, rgba(35, 23, 16, 0.96) 0%, rgba(20, 10, 7, 0.96) 100%);
+  border: 2px solid rgba(160,100,40,0.35);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+}
+
+.app.theme-cigar .hevosravit-card {
+  background: rgba(16, 10, 6, 0.92);
+  border-color: rgba(160,100,40,0.18);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+  color: #d7c7a5;
+}
+
+.app.theme-cigar .current-card {
+  background: rgba(18, 10, 6, 0.75);
+  border-color: rgba(160,100,40,0.18);
+}
+
+.app.theme-cigar .checkpoint {
+  border-color: rgba(160,100,40,0.18);
+  background: rgba(18, 10, 6, 0.5);
+  color: #d7c7a5;
+}
+
+.app.theme-cigar .checkpoint.hidden {
+  background: rgba(18, 10, 6, 0.6);
+  border-color: rgba(160,100,40,0.12);
+  color: rgba(215,199,165,0.9);
+}
+
+.app.theme-cigar .checkpoint-notice {
+  background: rgba(18, 10, 6, 0.88);
+  border-color: rgba(160,100,40,0.16);
+  box-shadow: none;
+  color: #d7c7a5;
+}
+
+.card-logo {
+  width: 110%;
+  opacity: 0.92;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6));
+}
+
+.card-visual .corner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  padding: 10px 8px;
+  line-height: 0.95;
+}
+
+.card-visual .corner-rank {
+  font-weight: 900;
+  font-size: 1.75rem;
+  color: var(--accent);
+  text-shadow:
+    -1px -1px 0 rgba(20,20,30,0.8),
+    1px -1px 0 rgba(20,20,30,0.8),
+    -1px 1px 0 rgba(20,20,30,0.8),
+    1px 1px 0 rgba(20,20,30,0.8);
+  -webkit-text-stroke: 1px rgba(10,10,20,0.75);
+}
+
+.card-visual .corner-suit {
+  font-size: 2.4rem;
+  color: var(--accent);
+  text-shadow:
+    -1px -1px 0 rgba(20,20,30,0.8),
+    1px -1px 0 rgba(20,20,30,0.8),
+    -1px 1px 0 rgba(20,20,30,0.8),
+    1px 1px 0 rgba(20,20,30,0.8);
+  -webkit-text-stroke: 1px rgba(10,10,20,0.75);
+}
+
+.card-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 3px rgba(10,10,20,0.45);
+}
+
+.card-visual.spade { --accent: var(--card-spade-color, #111); }
+.card-visual.heart { --accent: var(--card-heart-color, #d12222); }
+.card-visual.diamond { --accent: var(--card-diamond-color, #d12222); }
+.card-visual.club { --accent: var(--card-club-color, #111); }
+
+ .status-message {
+  margin-top: 8px;
+  color: #d7c7a5;
+  font-size: 0.95rem;
+}
+
+.checkpoints h3 {
+  margin: 0 0 12px;
+  color: var(--muted);
+}
+
+.checkpoint {
+  display: block;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,0,255,0.15);
+  background: rgba(15, 0, 40, 0.32);
+  font-weight: 700;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.checkpoint.red { color: #ff7272; }
+.checkpoint.dark { color: #c8f8ff; }
+
+ .checkpoint.hidden {
+  background: rgba(20, 10, 45, 0.35);
+  color: rgba(215, 199, 165, 0.75);
+  border-color: rgba(255,0,255,0.08);
+}
+
+.checkpoint.popped {
+  animation: checkpoint-pop 0.35s ease forwards;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.25);
+}
+
+@keyframes checkpoint-pop {
+  0% { transform: scale(0.95); opacity: 0.6; }
+  50% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+ .checkpoint-notice {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(10, 0, 35, 0.88);
+  color: #c8f8ff;
+  font-weight: 700;
+  border: 1px solid rgba(255,0,255,0.16);
+  box-shadow: 0 0 18px rgba(255,0,255,0.08);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+}
+
+.checkpoint-popup-card {
+  width: 72px;
+  min-width: 72px;
+}
+
+.card-visual.small {
+  width: 72px;
+  aspect-ratio: 3 / 4;
+}
+
+.card-visual.small .corner {
+  padding: 6px 5px;
+}
+
+.card-visual.small .corner-rank {
+  font-size: 1.05rem;
+}
+
+.card-visual.small .corner-suit {
+  font-size: 1.3rem;
+}
+
+.checkpoint-popup-text {
+  text-align: left;
+  display: grid;
+  gap: 4px;
+}
+
+.checkpoint-popup-title {
+  font-size: 1rem;
+  color: #ffd6ff;
+}
+
+.checkpoint-popup-warning,
+.popup-warning {
+  color: #ffaaaa;
+}
+
+
+.hevosravit-page .popup-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 18px;
+}
+
+.hevosravit-page .popup-content {
+  width: min(540px, 100%);
+  border-radius: 18px;
+  background: var(--popup-bg);
+  border: 1px solid var(--popup-border);
+  box-shadow: 0 0 50px rgba(0,0,0,0.45);
+  padding: 22px;
+  display: grid;
+  gap: 18px;
+}
+
+.hevosravit-page .popup-header {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--title-color);
+}
+
+.hevosravit-page .popup-body {
+  display: grid;
+  gap: 16px;
+  align-items: start;
+}
+
+.hevosravit-page .popup-card-block {
+  display: grid;
+  justify-items: center;
+}
+
+.hevosravit-page .popup-text-block {
+  display: grid;
+  gap: 10px;
+  color: var(--muted);
+}
+
+.hevosravit-page .popup-player-list {
+  display: grid;
+  gap: 8px;
+}
+
+.hevosravit-page .popup-player-line {
+  color: #d7c7a5;
+}
+
+.hevosravit-page .popup-close {
+  justify-self: flex-end;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.08);
+  color: #d7c7a5;
+  cursor: pointer;
+}
+
+.hevosravit-page .popup-close:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+ .lane.back-push {
+  background: rgba(0, 0, 0, 0.16);
+  box-shadow: inset 0 0 0 2px rgba(0,255,255,0.18);
+}
+
+.app.theme-cigar .lane.back-push {
+  background: rgba(80, 50, 30, 0.18);
+  box-shadow: inset 0 0 0 2px rgba(160,100,40,0.18);
+}
+
+.lane.back-push .horse-emoji {
+  transform: scale(1.15);
+}
+
+.lane.gold { box-shadow: inset 0 0 0 1px rgba(255,215,0,0.4); }
+.lane.silver { box-shadow: inset 0 0 0 1px rgba(192,192,192,0.5); }
+.lane.bronze { box-shadow: inset 0 0 0 1px rgba(205,127,50,0.5); }
+
+.setup label, .players-bets label { display:block; margin-bottom:8px }
+.player-names { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:8px }
+
+.horses-row { display:flex; gap:10px; margin:8px 0 16px }
+.horse-card { padding:8px; border-radius:8px; background:rgba(80,50,30,0.12); flex:1; text-align:center }
+.suit { font-size:1.5rem }
+.suit.red { color:#c11d1d }
+.suit.dark { color:#111111 }
+
+.players-bets { display:grid; gap:8px; margin-bottom:12px }
+.player-bet { display:flex; gap:8px; align-items:center }
+.player-name { width:110px }
+.player-bet select, .player-bet input { padding:8px; border-radius:8px }
+
+.reminder { margin-top:8px; color:#d7c7a5 }
+
+.race-view { display:flex; gap:14px; align-items:flex-start; flex-wrap: wrap; }
+.race-top { display:flex; gap:14px; align-items:center; flex-wrap: wrap; justify-content: space-between; }
+.last-card { background:rgba(80, 50, 30, 0.18); padding:10px; border-radius:10px; text-align:center; width:100%; }
+.card-big { font-size:1.6rem; margin:6px 0 }
+
+.race-track { display:flex; gap:8px; overflow-x:auto; padding-bottom: 4px; }
+.side-panel { flex: 0 0 260px; min-width: 220px; }
+
+@media (max-width: 980px) {
+  .card-visual { width: min(180px, 42vw); }
+  .race-view { flex-direction: column; }
+  .race-top, .side-panel { width: 100%; }
+  .race-top { flex-direction: column; align-items: stretch; }
+  .race-track { width: 100%; }
+  .horse-card { min-width: 0; }
+  .player-bet { flex-direction: column; align-items: stretch; }
+  .player-name { width: auto; }
+  .controls button { width: 100%; }
+}
+
+@media (max-width: 660px) {
+  .hevosravit-card { padding: 14px; }
+  .hevosravit-page { padding: 12px; }
+  .horses-row { flex-direction: column; }
+  .lane { min-width: 64px; }
+  .checkpoints { margin-top: 18px; }
+}
+.lane { width:72px; background:rgba(80, 50, 30, 0.18); padding:8px; border-radius:8px; display:flex; flex-direction:column; align-items:center }
+.maali { font-weight:700; margin-bottom:6px }
+.cell { width:100%; height:28px; border-bottom:1px dashed rgba(255,0,255,0.12); display:flex; align-items:center; justify-content:center }
+.cell.horse { background:linear-gradient(90deg, rgba(255,0,255,0.06), rgba(255,0,255,0.1)); }
+.lane-footer { margin-top:8px; font-weight:700 }
+.lane-footer.red { color:#ff4d6d }
+
+.side-panel { margin-left:12px; width:260px }
+.checkpoints .checkpoint { padding:6px; border-radius:8px; background:rgba(60,36,22,0.18); margin-bottom:6px }
+.checkpoint.hidden { color:rgba(215,199,165,0.65) }
+.log { margin-top:12px; max-height:320px; overflow:auto; background:rgba(20,12,8,0.45); padding:8px; border-radius:8px }
+.log-line { font-size:0.95rem; margin-bottom:6px }
+
+.results .placements { display:flex; gap:8px; margin-bottom:12px }
+.player-results { display:grid; gap:8px }
+
+.button-row button, .actions button { padding:10px 14px; border-radius:8px; background: var(--button-bg); border:1px solid var(--button-border); color: var(--accent-primary); }
+
+@media (max-width:720px) {
+  .race-view { flex-direction:column }
+  .side-panel { width:100% }
+}
