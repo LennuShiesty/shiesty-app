@@ -3,8 +3,8 @@ import "./WhosNext.css";
 
 const minFingers = 2;
 const maxFingers = 5;
-const joinCountdownStart = 7;
-const pickCountdownStart = 3;
+const joinCountdownStart = 5;
+const pickCountdownStart = 2;
 
 const taskCategories = {
   general: {
